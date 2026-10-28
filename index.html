@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apex Moto — Concesionario premium de motocicletas. Explora deportivas, adventure, custom y scooters de las mejores marcas: Ducati, Yamaha, Honda, Kawasaki, BMW y Harley-Davidson.">
+  <meta name="keywords" content="motocicletas, motos, concesionario, Ducati, Yamaha, Honda, Kawasaki, BMW, Harley-Davidson, financiación, taller mecánico">
+  <meta name="author" content="Apex Moto">
+  <meta name="theme-color" content="#0A0A0F">
+  <meta property="og:title" content="Apex Moto — Concesionario Premium de Motocicletas">
+  <meta property="og:description" content="Encuentra tu moto ideal. Catálogo completo, financiación flexible y taller certificado.">
+  <meta property="og:type" content="website">
+  <title>Apex Moto — Concesionario Premium de Motocicletas</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon (inline SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏍️</text></svg>">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER & NAVIGATION
+  ═══════════════════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <!-- Logo -->
+      <a href="#" class="logo" aria-label="Apex Moto - Inicio">
+        <div class="logo-icon">🏍️</div>
+        <div class="logo-text">Apex<span>Moto</span></div>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Navegación principal">
+        <a href="#hero" class="nav-link active">Inicio</a>
+        <a href="#catalogo" class="nav-link">Catálogo</a>
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#financiacion" class="nav-link">Financiación</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+        <a href="javascript:void(0)" class="nav-link admin-nav-link" id="admin-nav-link" onclick="ApexMoto.openAdminPanel()" style="display: none;">⚙️ Admin CRUD</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <button class="search-toggle" id="search-toggle" aria-label="Buscar motos">
+          🔍
+        </button>
+        <button class="cart-btn" id="cart-btn" aria-label="Ver cotizaciones">
+          🛒
+          <span class="cart-count" id="cart-count" style="display:none;">0</span>
+        </button>
+
+        <!-- User Profile / Auth Button -->
+        <div class="user-menu-wrapper" id="user-menu-wrapper">
+          <button class="auth-btn" id="auth-btn" onclick="ApexMoto.handleAuthBtnClick()" aria-label="Cuenta de usuario">
+            <span class="auth-btn-icon" id="auth-btn-icon">👤</span>
+            <span class="auth-btn-text" id="auth-btn-text">Ingresar</span>
+          </button>
+
+          <!-- User Dropdown Menu -->
+          <div class="user-dropdown" id="user-dropdown">
+            <div class="user-dropdown-header">
+              <div class="user-avatar" id="dropdown-user-avatar">👤</div>
+              <div class="user-details">
+                <div class="user-name" id="dropdown-user-name">Usuario</div>
+                <div class="user-role-badge" id="dropdown-user-role">Cliente</div>
+              </div>
+            </div>
+            <div class="user-dropdown-divider"></div>
+            <div id="admin-menu-option" style="display: none;">
+              <button class="user-dropdown-item admin-highlight" onclick="ApexMoto.openAdminPanel()">
+                ⚙️ Panel Admin CRUD
+              </button>
+            </div>
+            <button class="user-dropdown-item" onclick="ApexMoto.openCart()">
+              🛒 Mi Garaje / Carrito
+            </button>
+            <div class="user-dropdown-divider"></div>
+            <button class="user-dropdown-item text-danger" onclick="ApexMoto.logout()">
+              🚪 Cerrar Sesión
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SEARCH OVERLAY
+  ═══════════════════════════════════════════════════════ -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Buscar por modelo, marca o tipo..." autocomplete="off" aria-label="Buscar motocicletas">
+      <span class="search-box-icon">🔍</span>
+      <div class="search-results" id="search-results" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="container">
+      <div class="hero-content">
+        <!-- Text Side -->
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span class="pulse"></span>
+            Nuevos modelos 2026 disponibles
+          </div>
+          <h1 class="hero-title">
+            Potencia que<br>
+            <span class="highlight">se siente.</span>
+          </h1>
+          <p class="hero-description">
+            Descubrí la colección más exclusiva de motocicletas premium. Desde deportivas de alto rendimiento hasta adventure touring, encontrá la moto que define tu estilo.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalogo" class="btn btn-primary btn-lg">
+              🏁 Explora la Colección
+            </a>
+            <a href="#contacto" class="btn btn-outline btn-lg">
+              📅 Agendar Prueba de Manejo
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <h3>200<span>+</span></h3>
+              <p>Motos en Stock</p>
+            </div>
+            <div class="hero-stat">
+              <h3>6</h3>
+              <p>Marcas Premium</p>
+            </div>
+            <div class="hero-stat">
+              <h3>15<span>K+</span></h3>
+              <p>Clientes Felices</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Side -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <img id="hero-image" src="" alt="Modelo destacado" loading="eager">
+            <div class="hero-image-glow"></div>
+            <div class="hero-specs-float">
+              <div class="hero-spec-item">
+                <div class="value" id="hero-spec-hp">210 HP</div>
+                <div class="label">Potencia</div>
+              </div>
+              <div class="hero-spec-item">
+                <div class="value" id="hero-spec-cc">1103 cc</div>
+                <div class="label">Cilindrada</div>
+              </div>
+              <div class="hero-spec-item">
+                <div class="value" id="hero-spec-weight">173 kg</div>
+                <div class="label">Peso</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CATÁLOGO DE MOTOCICLETAS
+  ═══════════════════════════════════════════════════════ -->
+  <section class="catalog section" id="catalogo">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Catálogo</div>
+        <h2 class="section-title">Encuentra tu Moto Ideal</h2>
+        <p class="section-subtitle">Filtrá por marca, tipo, cilindrada o precio para encontrar la moto perfecta para vos.</p>
+      </div>
+
+      <div class="catalog-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar reveal">
+          <div class="filters-card">
+            <div class="filters-title">⚡ Filtros</div>
+
+            <!-- Brand Filter -->
+            <div class="filter-group">
+              <div class="filter-group-title">Marca</div>
+              <div class="filter-chips">
+                <button class="filter-chip active" data-filter-brand="Todas">Todas</button>
+                <button class="filter-chip" data-filter-brand="Ducati">Ducati</button>
+                <button class="filter-chip" data-filter-brand="Yamaha">Yamaha</button>
+                <button class="filter-chip" data-filter-brand="Honda">Honda</button>
+                <button class="filter-chip" data-filter-brand="Kawasaki">Kawasaki</button>
+                <button class="filter-chip" data-filter-brand="BMW">BMW</button>
+                <button class="filter-chip" data-filter-brand="Harley-Davidson">H-D</button>
+              </div>
+            </div>
+
+            <!-- Type Filter -->
+            <div class="filter-group">
+              <div class="filter-group-title">Tipo</div>
+              <div class="filter-chips">
+                <button class="filter-chip active" data-filter-type="Todos">Todos</button>
+                <button class="filter-chip" data-filter-type="Deportiva">Deportiva</button>
+                <button class="filter-chip" data-filter-type="Naked">Naked</button>
+                <button class="filter-chip" data-filter-type="Enduro">Enduro</button>
+                <button class="filter-chip" data-filter-type="Custom">Custom</button>
+                <button class="filter-chip" data-filter-type="Scooter">Scooter</button>
+              </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="filter-group">
+              <div class="filter-group-title">Precio Máximo</div>
+              <div class="filter-range">
+                <input type="range" class="range-slider" id="price-range" min="5000" max="50000" value="50000" step="1000">
+                <div class="range-label">
+                  <span>$5,000</span>
+                  <span class="range-value" id="price-value">$50,000</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CC Range -->
+            <div class="filter-group">
+              <div class="filter-group-title">Cilindrada Máxima</div>
+              <div class="filter-range">
+                <input type="range" class="range-slider" id="cc-range" min="100" max="1500" value="1500" step="50">
+                <div class="range-label">
+                  <span>100 cc</span>
+                  <span class="range-value" id="cc-value">1500 cc</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="filter-reset" id="filter-reset">↻ Resetear Filtros</button>
+          </div>
+        </aside>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="products-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CALCULADORA DE FINANCIACIÓN
+  ═══════════════════════════════════════════════════════ -->
+  <section class="financing section" id="financiacion">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Financiación</div>
+        <h2 class="section-title">Calculá tu Cuota Mensual</h2>
+        <p class="section-subtitle">Simulá tu financiación con nuestra calculadora interactiva. Tasa fija del 8.9% anual.</p>
+      </div>
+
+      <div class="financing-layout">
+        <!-- Calculator Form -->
+        <div class="financing-form reveal">
+          <h3>💰 Simulador de Cuotas</h3>
+          <div class="financing-fields">
+            <div class="form-group">
+              <label class="form-label" for="fin-price">Precio de la Moto (USD)</label>
+              <input type="number" class="form-input" id="fin-price" value="15000" min="1000" max="100000" step="500" placeholder="Ej: 15000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fin-down">Inicial (%)</label>
+              <input type="number" class="form-input" id="fin-down" value="20" min="0" max="90" step="5" placeholder="Ej: 20">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fin-term">Plazo en Meses</label>
+              <select class="form-select" id="fin-term">
+                <option value="12">12 meses</option>
+                <option value="24" selected>24 meses</option>
+                <option value="36">36 meses</option>
+                <option value="48">48 meses</option>
+                <option value="60">60 meses</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="fin-calculate" style="width:100%;">
+              📊 Calcular Cuota
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Display -->
+        <div class="financing-result reveal">
+          <div class="result-card">
+            <div class="result-label">Tu Cuota Mensual Estimada</div>
+            <div class="result-amount" id="result-amount">$525</div>
+            <div class="result-period" id="result-period">por mes durante 24 meses</div>
+
+            <div class="result-breakdown">
+              <div class="breakdown-item">
+                <div class="value" id="result-down">$3,000</div>
+                <div class="label">Inicial</div>
+              </div>
+              <div class="breakdown-item">
+                <div class="value" id="result-financed">$12,000</div>
+                <div class="label">Financiado</div>
+              </div>
+              <div class="breakdown-item">
+                <div class="value" id="result-total">$15,600</div>
+                <div class="label">Total a Pagar</div>
+              </div>
+              <div class="breakdown-item">
+                <div class="value" id="result-interest">$600</div>
+                <div class="label">Intereses</div>
+              </div>
+            </div>
+            <p class="result-note">* Cálculo estimativo. La tasa y condiciones finales dependen de la evaluación crediticia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SERVICIOS Y TALLER MECÁNICO
+  ═══════════════════════════════════════════════════════ -->
+  <section class="services section" id="servicios">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Servicios</div>
+        <h2 class="section-title">Taller & Servicio Certificado</h2>
+        <p class="section-subtitle">Técnicos especializados y repuestos originales para mantener tu moto en estado óptimo.</p>
+      </div>
+
+      <!-- Service Cards (rendered from data) -->
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">🔧</div>
+          <h3>Mantenimiento Preventivo</h3>
+          <p>Cambio de aceite, filtros, revisión de frenos, cadena y componentes críticos. Protocolos certificados por cada marca.</p>
+          <div class="service-features">
+            <span class="service-feature">Diagnóstico computarizado</span>
+            <span class="service-feature">Aceites sintéticos premium</span>
+            <span class="service-feature">Check-list de 42 puntos</span>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">⚙️</div>
+          <h3>Repuestos Originales</h3>
+          <p>Acceso directo a catálogos de repuestos originales de todas las marcas que distribuimos, con garantía de fábrica.</p>
+          <div class="service-features">
+            <span class="service-feature">Envío express</span>
+            <span class="service-feature">Garantía de fábrica</span>
+            <span class="service-feature">Asesoría técnica incluida</span>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">🎨</div>
+          <h3>Personalización</h3>
+          <p>Transformá tu moto con accesorios, pintura custom, escape deportivo, suspensión y electrónica de alto rendimiento.</p>
+          <div class="service-features">
+            <span class="service-feature">Diseño 3D previo</span>
+            <span class="service-feature">Marcas premium</span>
+            <span class="service-feature">Instalación profesional</span>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-4">
+          <div class="service-icon">🛡️</div>
+          <h3>Garantía Extendida</h3>
+          <p>Planes de garantía extendida de hasta 5 años con cobertura total de motor, transmisión y componentes electrónicos.</p>
+          <div class="service-features">
+            <span class="service-feature">Cobertura total</span>
+            <span class="service-feature">Asistencia en ruta 24/7</span>
+            <span class="service-feature">Sin deducible</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workshop Appointment Form -->
+      <div class="workshop-form-container reveal">
+        <h3>📅 Agendar Cita de Taller</h3>
+        <p>Completá el formulario y te confirmaremos tu turno en menos de 2 horas.</p>
+        <form class="workshop-form" id="workshop-form">
+          <div class="form-group">
+            <label class="form-label" for="ws-name">Nombre Completo</label>
+            <input type="text" class="form-input" id="ws-name" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ws-phone">Teléfono</label>
+            <input type="tel" class="form-input" id="ws-phone" placeholder="+1 234 567 890" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ws-bike">Modelo de tu Moto</label>
+            <input type="text" class="form-input" id="ws-bike" placeholder="Ej: Yamaha MT-09" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ws-service">Servicio Requerido</label>
+            <select class="form-select" id="ws-service" required>
+              <option value="">Seleccionar servicio...</option>
+              <option value="maintenance">Mantenimiento preventivo</option>
+              <option value="repair">Reparación</option>
+              <option value="custom">Personalización</option>
+              <option value="diagnostic">Diagnóstico</option>
+              <option value="other">Otro</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="ws-notes">Observaciones</label>
+            <textarea class="form-textarea" id="ws-notes" placeholder="Describe brevemente lo que necesitas..." rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width" style="width:100%;">
+            ✅ Agendar Cita
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TESTIMONIOS & MARCAS ALIADAS
+  ═══════════════════════════════════════════════════════ -->
+  <section class="testimonials section" id="testimonios">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Testimonios</div>
+        <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+        <p class="section-subtitle">Miles de motociclistas confían en Apex Moto para sus compras y servicios.</p>
+      </div>
+
+      <!-- Testimonials Grid (rendered by JS) -->
+      <div class="testimonials-grid" id="testimonials-grid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Partner Brands -->
+      <div class="partners reveal" id="partners-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONTACTO, UBICACIÓN & FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <section class="contact section" id="contacto">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Contacto</div>
+        <h2 class="section-title">Hablemos de tu Próxima Moto</h2>
+        <p class="section-subtitle">Estamos listos para asesorarte. Escribinos o visitá nuestro showroom.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="contact-form-card reveal">
+          <h3>✉️ Enviar Mensaje</h3>
+          <p>Te respondemos en menos de 24 horas.</p>
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label class="form-label" for="ct-name">Nombre</label>
+              <input type="text" class="form-input" id="ct-name" placeholder="Tu nombre completo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ct-email">Email</label>
+              <input type="email" class="form-input" id="ct-email" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ct-subject">Asunto</label>
+              <select class="form-select" id="ct-subject" required>
+                <option value="">Seleccionar...</option>
+                <option value="cotizacion">Cotización de moto</option>
+                <option value="financiacion">Información de financiación</option>
+                <option value="taller">Servicio de taller</option>
+                <option value="testdrive">Prueba de manejo</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ct-message">Mensaje</label>
+              <textarea class="form-textarea" id="ct-message" placeholder="¿En qué podemos ayudarte?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+              🚀 Enviar Mensaje
+            </button>
+          </form>
+        </div>
+
+        <!-- Map & Contact Details -->
+        <div class="contact-info-side reveal">
+          <!-- Map Placeholder -->
+          <div class="contact-map">
+            <div class="map-placeholder">
+              <span class="icon">📍</span>
+              <p><strong>Apex Moto Showroom</strong></p>
+              <p>Av. Libertador 4500, Buenos Aires</p>
+              <a href="https://maps.google.com" target="_blank" class="btn btn-sm btn-outline" style="margin-top: 8px;">
+                Ver en Google Maps
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Details Grid -->
+          <div class="contact-details">
+            <div class="contact-detail-card">
+              <span class="detail-icon">📞</span>
+              <div class="detail-info">
+                <h4>Teléfono</h4>
+                <p><a href="tel:+5411234567">+54 11 2345-6789</a></p>
+              </div>
+            </div>
+            <div class="contact-detail-card">
+              <span class="detail-icon">💬</span>
+              <div class="detail-info">
+                <h4>WhatsApp</h4>
+                <p><a href="https://wa.me/5411234567" target="_blank">+54 11 2345-6789</a></p>
+              </div>
+            </div>
+            <div class="contact-detail-card">
+              <span class="detail-icon">📧</span>
+              <div class="detail-info">
+                <h4>Email</h4>
+                <p><a href="mailto:info@apexmoto.com">info@apexmoto.com</a></p>
+              </div>
+            </div>
+            <div class="contact-detail-card">
+              <span class="detail-icon">🕐</span>
+              <div class="detail-info">
+                <h4>Horarios</h4>
+                <p>Lun-Vie: 9–19h<br>Sáb: 9–14h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-icon">🏍️</div>
+            <div class="logo-text">Apex<span>Moto</span></div>
+          </a>
+          <p>Tu concesionario premium de motocicletas. Las mejores marcas, financiación flexible y servicio postventa de excelencia.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram">📷</a>
+            <a href="#" class="social-link" aria-label="Facebook">📘</a>
+            <a href="#" class="social-link" aria-label="YouTube">▶️</a>
+            <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-col">
+          <h4>Catálogo</h4>
+          <ul>
+            <li><a href="#catalogo">Deportivas</a></li>
+            <li><a href="#catalogo">Naked</a></li>
+            <li><a href="#catalogo">Adventure</a></li>
+            <li><a href="#catalogo">Custom</a></li>
+            <li><a href="#catalogo">Scooter</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#servicios">Mantenimiento</a></li>
+            <li><a href="#servicios">Repuestos</a></li>
+            <li><a href="#servicios">Personalización</a></li>
+            <li><a href="#servicios">Garantía</a></li>
+            <li><a href="#financiacion">Financiación</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#contacto">Formulario</a></li>
+            <li><a href="https://wa.me/5411234567" target="_blank">WhatsApp</a></li>
+            <li><a href="tel:+5411234567">+54 11 2345-6789</a></li>
+            <li><a href="mailto:info@apexmoto.com">info@apexmoto.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Apex Moto. Todos los derechos reservados.</p>
+        <p>Diseñado con 🏁 y pasión por las dos ruedas</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MODAL — Ficha Técnica / Vista Detallada
+  ═══════════════════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-backdrop" onclick="ApexMoto.closeModal()"></div>
+  <div class="modal" id="detail-modal" role="dialog" aria-modal="true" aria-label="Ficha técnica del vehículo">
+    <button class="modal-close" onclick="ApexMoto.closeModal()" aria-label="Cerrar">✕</button>
+    <div class="modal-body">
+      <!-- Gallery -->
+      <div class="modal-gallery">
+        <img id="modal-gallery-img" src="" alt="" style="transition: opacity 0.3s ease;">
+        <div class="modal-gallery-nav" id="modal-gallery-dots">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="modal-info">
+        <div class="modal-header">
+          <div>
+            <div id="modal-badges" style="margin-bottom: 8px;"></div>
+            <div class="modal-brand" id="modal-brand"></div>
+            <h2 class="modal-model" id="modal-model"></h2>
+          </div>
+          <div class="modal-price" id="modal-price"></div>
+        </div>
+
+        <p class="modal-description" id="modal-description"></p>
+
+        <!-- Specs Table -->
+        <table class="specs-table">
+          <tbody id="modal-specs">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+
+        <!-- Quick Financing -->
+        <div class="modal-financing">
+          <h4>💳 Financiación Estimada (20% inicial)</h4>
+          <div class="financing-quick" id="modal-financing-options">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="ApexMoto.addToCartFromModal()">
+            🛒 Añadir al Carrito
+          </button>
+          <button class="btn btn-outline" onclick="ApexMoto.requestTestDrive()">
+            🏁 Agendar Prueba de Manejo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CART DRAWER
+  ═══════════════════════════════════════════════════════ -->
+  <div class="cart-overlay" id="cart-overlay" onclick="ApexMoto.closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrito de compras" role="dialog" aria-modal="true">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <span>🛒 Tu Carrito</span>
+        <span class="item-count" id="drawer-item-count">0</span>
+      </div>
+      <button class="cart-drawer-close" onclick="ApexMoto.closeCart()" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <div class="cart-drawer-body" id="cart-drawer-body">
+      <!-- Dynamic cart items rendered by JS -->
+    </div>
+
+    <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+      <div class="cart-totals">
+        <div class="cart-total-row">
+          <span class="label">Subtotal</span>
+          <span class="value" id="cart-subtotal">$0</span>
+        </div>
+        <div class="cart-total-row">
+          <span class="label">Alistamiento y Gestión</span>
+          <span class="value" style="color: #4CAF50;">GRATIS</span>
+        </div>
+        <div class="cart-total-row grand-total">
+          <span class="label">Total Estimado</span>
+          <span class="value" id="cart-total">$0</span>
+        </div>
+      </div>
+
+      <div class="cart-footer-actions">
+        <button class="btn btn-primary btn-block" onclick="ApexMoto.openCheckout()" id="btn-proceed-checkout">
+          💳 Proceder al Pago / Reserva
+        </button>
+        <button class="cart-clear" onclick="ApexMoto.clearCart()">
+          🗑️ Vaciar carrito
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHECKOUT MODAL (Pasarela de Pago Simulada / Stripe UX)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="checkout-backdrop" id="checkout-backdrop" onclick="ApexMoto.closeCheckout()"></div>
+  <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-label="Finalizar compra">
+    <div class="checkout-header">
+      <h2>💳 Finalizar Reserva y Compra</h2>
+      <button class="cart-drawer-close" onclick="ApexMoto.closeCheckout()" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="checkout-body">
+      <!-- Step 1 & 2 Container -->
+      <div id="checkout-active-step">
+        <div class="checkout-steps">
+          <div class="checkout-step active" id="step-badge-1">
+            <span class="step-number">1</span>
+            <span>Datos</span>
+          </div>
+          <div class="step-divider"></div>
+          <div class="checkout-step" id="step-badge-2">
+            <span class="step-number">2</span>
+            <span>Pago</span>
+          </div>
+          <div class="step-divider"></div>
+          <div class="checkout-step" id="step-badge-3">
+            <span class="step-number">3</span>
+            <span>Confirmación</span>
+          </div>
+        </div>
+
+        <!-- Order Summary Pill -->
+        <div class="checkout-summary">
+          <h4>Resumen de tu Orden</h4>
+          <div class="checkout-summary-items" id="checkout-summary-items">
+            <!-- Items populated by JS -->
+          </div>
+          <div class="checkout-grand-total">
+            <span class="label">Total a Pagar / Reservar</span>
+            <span class="amount" id="checkout-grand-total-amount">$0</span>
+          </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <form class="checkout-form" id="checkout-form" onsubmit="ApexMoto.processPayment(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-name" class="form-label">Nombre Completo *</label>
+              <input type="text" id="checkout-name" class="form-input" placeholder="Carlos Mendoza" required>
+            </div>
+            <div class="form-group">
+              <label for="checkout-email" class="form-label">Correo Electrónico *</label>
+              <input type="email" id="checkout-email" class="form-input" placeholder="carlos@ejemplo.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-phone" class="form-label">Teléfono Móvil *</label>
+              <input type="tel" id="checkout-phone" class="form-input" placeholder="+1 (555) 019-2834" required>
+            </div>
+            <div class="form-group">
+              <label for="checkout-delivery" class="form-label">Modalidad de Entrega</label>
+              <select id="checkout-delivery" class="form-select">
+                <option value="pickup">Retiro VIP en Concesionario Oficial</option>
+                <option value="delivery">Envío Seguro en Tráiler Especializado</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Payment Methods -->
+          <div style="margin-top: 8px;">
+            <label class="form-label" style="margin-bottom: 12px; display: block;">Selecciona Método de Pago</label>
+            <div class="payment-methods">
+              <!-- Option 1: Card / Stripe -->
+              <div class="payment-method selected" id="method-card" onclick="ApexMoto.selectPaymentMethod('card')">
+                <div class="payment-radio"></div>
+                <div class="payment-method-info">
+                  <h4>Tarjeta de Crédito / Débito (Stripe)</h4>
+                  <p>Visa, MasterCard, American Express con encriptación SSL</p>
+                </div>
+                <div class="payment-method-icon">💳</div>
+              </div>
+
+              <!-- Option 2: PayPal -->
+              <div class="payment-method" id="method-paypal" onclick="ApexMoto.selectPaymentMethod('paypal')">
+                <div class="payment-radio"></div>
+                <div class="payment-method-info">
+                  <h4>PayPal Express</h4>
+                  <p>Paga con tu saldo o tarjetas asociadas en un clic</p>
+                </div>
+                <div class="payment-method-icon">🅿️</div>
+              </div>
+
+              <!-- Option 3: Deposit / Reservation -->
+              <div class="payment-method" id="method-deposit" onclick="ApexMoto.selectPaymentMethod('deposit')">
+                <div class="payment-radio"></div>
+                <div class="payment-method-info">
+                  <h4>Seña / Reserva Oficial ($1,000 USD)</h4>
+                  <p>Bloquea la unidad por 7 días y completa el pago en concesionario</p>
+                </div>
+                <div class="payment-method-icon">🏦</div>
+              </div>
+            </div>
+
+            <!-- Card Inputs (Stripe UX) -->
+            <div id="card-payment-fields">
+              <div class="form-group" style="margin-bottom: 12px;">
+                <label for="card-number" class="form-label">Número de Tarjeta</label>
+                <input type="text" id="card-number" class="form-input" placeholder="4532 •••• •••• 8890" maxlength="19" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="card-exp" class="form-label">Vencimiento (MM/AA)</label>
+                  <input type="text" id="card-exp" class="form-input" placeholder="12/28" maxlength="5" required>
+                </div>
+                <div class="form-group">
+                  <label for="card-cvc" class="form-label">CVC / CVV</label>
+                  <input type="password" id="card-cvc" class="form-input" placeholder="•••" maxlength="4" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- PayPal Note -->
+            <div id="paypal-payment-fields" style="display: none; padding: 14px; background: rgba(99, 91, 255, 0.1); border-radius: 8px; border: 1px dashed rgba(99, 91, 255, 0.4); margin-bottom: 16px; font-size: 0.85rem; color: var(--text-secondary);">
+              ℹ️ Serás redirigido de forma segura al portal de <strong>PayPal</strong> para autorizar la transacción.
+            </div>
+
+            <!-- Deposit Note -->
+            <div id="deposit-payment-fields" style="display: none; padding: 14px; background: rgba(255, 171, 0, 0.1); border-radius: 8px; border: 1px dashed rgba(255, 171, 0, 0.4); margin-bottom: 16px; font-size: 0.85rem; color: var(--text-secondary);">
+              ℹ️ Se realizará un cobro de <strong>$1,000 USD</strong> en concepto de reserva irrevocable de chasis/VIN. El saldo restante se cancela al momento de entrega o mediante plan de financiación aprobado.
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="btn-submit-order" style="margin-top: 10px;">
+            🔒 Confirmar Pago Seguro
+          </button>
+          <p style="text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 8px;">
+            🔒 Encriptación AES-256 bits · Certificado PCI-DSS Nivel 1 · Cumplimiento Antifraude
+          </p>
+        </form>
+      </div>
+
+      <!-- Success Result Screen (Hidden by default) -->
+      <div id="checkout-success-screen" style="display: none;">
+        <div class="checkout-success">
+          <div class="success-icon">🎉</div>
+          <h3>¡Pago y Reserva Confirmados!</h3>
+          <p>Tu orden ha sido procesada exitosamente en el sistema de Apex Moto.</p>
+          <div class="order-number" id="success-order-id">APX-00000</div>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px;">
+            Hemos enviado el recibo detallado y la documentación oficial de reserva a tu correo electrónico. Un asesor comercial especializado se pondrá en contacto contigo en los próximos 30 minutos.
+          </p>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="ApexMoto.closeCheckout()">
+              🏍️ Volver al Concesionario
+            </button>
+            <button class="btn btn-outline" onclick="ApexMoto.printReceipt()">
+              📄 Imprimir Recibo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       AUTH MODAL (Login & Register)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="auth-backdrop" id="auth-backdrop" onclick="ApexMoto.closeAuthModal()"></div>
+  <div class="auth-modal" id="auth-modal" role="dialog" aria-modal="true" aria-label="Iniciar Sesión o Registrarse">
+    <button class="auth-close" onclick="ApexMoto.closeAuthModal()" aria-label="Cerrar">✕</button>
+    <div class="auth-header">
+      <div class="logo-text">Apex<span>Moto</span></div>
+      <p>Accede a tu cuenta de cliente o administración</p>
+    </div>
+
+    <!-- Quick Demo Access Box -->
+    <div class="demo-accounts">
+      <div class="demo-accounts-title">⚡ Cuentas de Demostración (1 Clic)</div>
+      <div class="demo-account-buttons">
+        <button class="demo-btn demo-admin" onclick="ApexMoto.fillDemoLogin('admin')">
+          👑 Admin CRUD
+        </button>
+        <button class="demo-btn" onclick="ApexMoto.fillDemoLogin('user')">
+          👤 Cliente Normal
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" id="tab-btn-login" onclick="ApexMoto.switchAuthTab('login')">
+        Iniciar Sesión
+      </button>
+      <button class="auth-tab-btn" id="tab-btn-register" onclick="ApexMoto.switchAuthTab('register')">
+        Crear Cuenta
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" onsubmit="ApexMoto.handleLogin(event)">
+      <div class="form-group" style="margin-bottom: 14px;">
+        <label for="login-email" class="form-label">Correo Electrónico</label>
+        <input type="email" id="login-email" class="form-input" placeholder="admin@apexmoto.com" required>
+      </div>
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="login-password" class="form-label">Contraseña</label>
+        <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        🚀 Ingresar a Apex Moto
+      </button>
+    </form>
+
+    <!-- Register Form (Hidden by default) -->
+    <form id="register-form" style="display: none;" onsubmit="ApexMoto.handleRegister(event)">
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="register-name" class="form-label">Nombre Completo</label>
+        <input type="text" id="register-name" class="form-input" placeholder="Valentino Rossi" required>
+      </div>
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="register-email" class="form-label">Correo Electrónico</label>
+        <input type="email" id="register-email" class="form-input" placeholder="piloto@apexmoto.com" required>
+      </div>
+      <div class="form-row" style="margin-bottom: 12px;">
+        <div class="form-group">
+          <label for="register-password" class="form-label">Contraseña</label>
+          <input type="password" id="register-password" class="form-input" placeholder="••••••••" minlength="6" required>
+        </div>
+        <div class="form-group">
+          <label for="register-role" class="form-label">Tipo de Usuario</label>
+          <select id="register-role" class="form-select">
+            <option value="user">Cliente</option>
+            <option value="admin">Administrador (Permiso CRUD)</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        ✅ Crear Cuenta
+      </button>
+    </form>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ADMIN DASHBOARD / CRUD MODAL
+  ═══════════════════════════════════════════════════════ -->
+  <div class="admin-backdrop" id="admin-backdrop" onclick="ApexMoto.closeAdminPanel()"></div>
+  <div class="admin-modal" id="admin-modal" role="dialog" aria-modal="true" aria-label="Panel de Gestión de Motocicletas">
+    <div class="admin-header">
+      <div class="admin-header-title">
+        <h2>🛠️ Gestión de Inventario</h2>
+        <span class="admin-badge">Admin Panel CRUD</span>
+      </div>
+      <button class="cart-drawer-close" onclick="ApexMoto.closeAdminPanel()" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="admin-body">
+      <!-- Admin Navigation Tabs for all Database entities -->
+      <div class="admin-tabs-nav">
+        <button class="btn btn-sm btn-primary admin-tab-btn active" id="tab-btn-motos" onclick="ApexMoto.switchAdminTab('motos')">
+          🏍️ Inventario Motos <span class="tab-badge" id="badge-motos-count">0</span>
+        </button>
+        <button class="btn btn-sm btn-outline admin-tab-btn" id="tab-btn-orders" onclick="ApexMoto.switchAdminTab('orders')">
+          💳 Órdenes & Ventas <span class="tab-badge" id="badge-orders-count">0</span>
+        </button>
+        <button class="btn btn-sm btn-outline admin-tab-btn" id="tab-btn-workshop" onclick="ApexMoto.switchAdminTab('workshop')">
+          📅 Citas Taller <span class="tab-badge" id="badge-workshop-count">0</span>
+        </button>
+        <button class="btn btn-sm btn-outline admin-tab-btn" id="tab-btn-contact" onclick="ApexMoto.switchAdminTab('contact')">
+          ✉️ Mensajes Contacto <span class="tab-badge" id="badge-contact-count">0</span>
+        </button>
+        <button class="btn btn-sm btn-outline admin-tab-btn" id="tab-btn-users" onclick="ApexMoto.switchAdminTab('users')">
+          👥 Usuarios <span class="tab-badge" id="badge-users-count">0</span>
+        </button>
+      </div>
+
+      <!-- VIEW 1: MOTORCYCLES CRUD -->
+      <div class="admin-view-panel active" id="admin-view-motos">
+        <!-- Admin Stats Grid -->
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon">🏍️</div>
+            <div class="admin-stat-info">
+              <div class="stat-value" id="admin-stat-total">0</div>
+              <div class="stat-label">Motos en Catálogo</div>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon">🏷️</div>
+            <div class="admin-stat-info">
+              <div class="stat-value" id="admin-stat-brands">0</div>
+              <div class="stat-label">Marcas Disponibles</div>
+            </div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon">💰</div>
+            <div class="admin-stat-info">
+              <div class="stat-value" id="admin-stat-value">$0</div>
+              <div class="stat-label">Valor del Inventario</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Toolbar -->
+        <div class="admin-toolbar">
+          <div class="admin-search-box">
+            <span class="admin-search-icon">🔍</span>
+            <input type="text" id="admin-table-search" placeholder="Buscar por modelo o marca..." oninput="ApexMoto.filterAdminTable()">
+          </div>
+          <div class="admin-actions-group">
+            <button class="btn btn-primary" onclick="ApexMoto.openAddMotoModal()">
+              ➕ Nueva Motocicleta
+            </button>
+            <button class="btn btn-outline" onclick="ApexMoto.resetCatalogToDefault()" title="Restablece las motocicletas originales del sistema">
+              🔄 Restablecer Fábrica
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Table -->
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Motocicleta</th>
+                <th>Categoría</th>
+                <th>Specs (CC / HP / Año)</th>
+                <th>Precio USD</th>
+                <th>Estado</th>
+                <th style="text-align: right;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Populated dynamically by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 2: ORDERS -->
+      <div class="admin-view-panel" id="admin-view-orders">
+        <div class="admin-toolbar">
+          <h3 style="font-size: 1.1rem; margin: 0;">💳 Registro de Compras y Reservas (MySQL)</h3>
+          <button class="btn btn-sm btn-outline" onclick="ApexMoto.loadAdminOrders()">🔄 Actualizar Órdenes</button>
+        </div>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Código Orden</th>
+                <th>Cliente</th>
+                <th>Contacto (Email / Tel)</th>
+                <th>Modalidad</th>
+                <th>Método</th>
+                <th>Total USD</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-table-body">
+              <tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">Cargando órdenes desde MySQL...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 3: WORKSHOP APPOINTMENTS -->
+      <div class="admin-view-panel" id="admin-view-workshop">
+        <div class="admin-toolbar">
+          <h3 style="font-size: 1.1rem; margin: 0;">📅 Citas de Taller Agendadas (MySQL)</h3>
+          <button class="btn btn-sm btn-outline" onclick="ApexMoto.loadAdminWorkshop()">🔄 Actualizar Citas</button>
+        </div>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Teléfono</th>
+                <th>Moto</th>
+                <th>Servicio Solicitado</th>
+                <th>Observaciones</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="admin-workshop-table-body">
+              <tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">Cargando citas desde MySQL...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 4: CONTACT MESSAGES -->
+      <div class="admin-view-panel" id="admin-view-contact">
+        <div class="admin-toolbar">
+          <h3 style="font-size: 1.1rem; margin: 0;">✉️ Mensajes de Contacto Recibidos (MySQL)</h3>
+          <button class="btn btn-sm btn-outline" onclick="ApexMoto.loadAdminContact()">🔄 Actualizar Mensajes</button>
+        </div>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Remitente</th>
+                <th>Email</th>
+                <th>Asunto</th>
+                <th>Mensaje</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="admin-contact-table-body">
+              <tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-muted);">Cargando mensajes desde MySQL...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 5: USERS -->
+      <div class="admin-view-panel" id="admin-view-users">
+        <div class="admin-toolbar">
+          <h3 style="font-size: 1.1rem; margin: 0;">👥 Usuarios y Clientes Registrados (MySQL)</h3>
+          <button class="btn btn-sm btn-outline" onclick="ApexMoto.loadAdminUsers()">🔄 Actualizar Usuarios</button>
+        </div>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Fecha Registro</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-table-body">
+              <tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-muted);">Cargando usuarios desde MySQL...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ADD / EDIT MOTORCYCLE FORM MODAL
+  ═══════════════════════════════════════════════════════ -->
+  <div class="moto-form-backdrop" id="moto-form-backdrop" onclick="ApexMoto.closeMotoFormModal()"></div>
+  <div class="moto-form-modal" id="moto-form-modal" role="dialog" aria-modal="true" aria-label="Formulario de Motocicleta">
+    <div class="moto-form-header">
+      <h3 id="moto-form-title">➕ Nueva Motocicleta</h3>
+      <button class="cart-drawer-close" onclick="ApexMoto.closeMotoFormModal()" aria-label="Cerrar">✕</button>
+    </div>
+
+    <form id="moto-crud-form" onsubmit="ApexMoto.saveMotorcycle(event)">
+      <input type="hidden" id="moto-edit-id" value="">
+
+      <div class="moto-form-body">
+        <!-- Row 1: Brand, Model, Category -->
+        <div class="moto-form-grid">
+          <div class="form-group">
+            <label for="moto-brand" class="form-label">Marca *</label>
+            <select id="moto-brand" class="form-select" required>
+              <option value="Ducati">Ducati</option>
+              <option value="Yamaha">Yamaha</option>
+              <option value="BMW">BMW</option>
+              <option value="Honda">Honda</option>
+              <option value="Kawasaki">Kawasaki</option>
+              <option value="KTM">KTM</option>
+              <option value="Harley-Davidson">Harley-Davidson</option>
+              <option value="Triumph">Triumph</option>
+              <option value="Aprilia">Aprilia</option>
+              <option value="Suzuki">Suzuki</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="moto-model" class="form-label">Modelo *</label>
+            <input type="text" id="moto-model" class="form-input" placeholder="ej. Panigale V4 R" required>
+          </div>
+          <div class="form-group">
+            <label for="moto-type" class="form-label">Categoría *</label>
+            <select id="moto-type" class="form-select" required>
+              <option value="Deportiva">Deportiva</option>
+              <option value="Naked">Naked</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Cruiser">Cruiser</option>
+              <option value="Touring">Touring</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 2: Price, Condition, Year -->
+        <div class="moto-form-grid">
+          <div class="form-group">
+            <label for="moto-price" class="form-label">Precio (USD) *</label>
+            <input type="number" id="moto-price" class="form-input" placeholder="25000" min="1000" max="200000" required>
+          </div>
+          <div class="form-group">
+            <label for="moto-condition" class="form-label">Condición *</label>
+            <select id="moto-condition" class="form-select" required>
+              <option value="Nuevo">Nuevo</option>
+              <option value="Usado Certificado">Usado Certificado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="moto-year" class="form-label">Año *</label>
+            <input type="number" id="moto-year" class="form-input" value="2026" min="2010" max="2030" required>
+          </div>
+        </div>
+
+        <!-- Row 3: CC, HP, Torque, Weight -->
+        <div class="moto-form-grid">
+          <div class="form-group">
+            <label for="moto-cc" class="form-label">Cilindrada (cc) *</label>
+            <input type="number" id="moto-cc" class="form-input" placeholder="998" min="50" max="3000" required>
+          </div>
+          <div class="form-group">
+            <label for="moto-hp" class="form-label">Potencia (HP) *</label>
+            <input type="number" id="moto-hp" class="form-input" placeholder="200" min="10" max="500" required>
+          </div>
+          <div class="form-group">
+            <label for="moto-torque" class="form-label">Torque</label>
+            <input type="text" id="moto-torque" class="form-input" placeholder="ej. 115 Nm" value="110 Nm">
+          </div>
+        </div>
+
+        <!-- Row 4: Weight, Tank, Brakes, Color -->
+        <div class="moto-form-grid">
+          <div class="form-group">
+            <label for="moto-weight" class="form-label">Peso (kg)</label>
+            <input type="number" id="moto-weight" class="form-input" placeholder="185" value="185">
+          </div>
+          <div class="form-group">
+            <label for="moto-tank" class="form-label">Tanque (Litros)</label>
+            <input type="number" id="moto-tank" class="form-input" placeholder="16" value="16">
+          </div>
+          <div class="form-group">
+            <label for="moto-color" class="form-label">Color / Edición</label>
+            <input type="text" id="moto-color" class="form-input" placeholder="Racing Red" value="Edición Especial">
+          </div>
+        </div>
+
+        <!-- Row 5: Image URL & Quick Presets -->
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="moto-image" class="form-label">URL de Imagen Principal *</label>
+          <input type="url" id="moto-image" class="form-input" placeholder="https://images.unsplash.com/..." required oninput="ApexMoto.updateImagePreview(this.value)">
+
+          <div style="margin-top: 8px;">
+            <span style="font-size: 0.72rem; color: var(--text-muted);">Preset rápido de fotos HD:</span>
+            <div class="image-preset-picker">
+              <span class="preset-chip" onclick="ApexMoto.applyPresetImage('https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80')">🏍️ Ducati Red</span>
+              <span class="preset-chip" onclick="ApexMoto.applyPresetImage('https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80')">⚡ Yamaha Dark</span>
+              <span class="preset-chip" onclick="ApexMoto.applyPresetImage('https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=800&q=80')">🏆 Superbike Carbon</span>
+              <span class="preset-chip" onclick="ApexMoto.applyPresetImage('https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=800&q=80')">🌲 Adventure BMW</span>
+              <span class="preset-chip" onclick="ApexMoto.applyPresetImage('https://images.unsplash.com/photo-1558980664-769d59546b3d?w=800&q=80')">🔥 Cruiser Custom</span>
+            </div>
+          </div>
+
+          <div class="image-preview-container">
+            <img id="moto-image-preview" src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=800&q=80" alt="Vista previa" class="image-preview-thumb">
+            <div>
+              <div style="font-weight: 600; font-size: 0.85rem;">Vista previa de la motocicleta</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Esta imagen se mostrará en el catálogo y en la ficha técnica.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Checkbox -->
+        <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="moto-featured" style="width: 18px; height: 18px; accent-color: var(--color-primary); cursor: pointer;">
+          <label for="moto-featured" style="font-size: 0.88rem; font-weight: 600; cursor: pointer;">
+            ★ Marcar como Motocicleta Destacada (aparece con badge especial y en vista principal)
+          </label>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="moto-description" class="form-label">Descripción Detallada *</label>
+          <textarea id="moto-description" class="form-textarea" rows="3" placeholder="Describe los puntos destacados, tecnología y sensaciones de manejo..." required>Motocicleta de altas prestaciones con tecnología de competición y máxima precisión en curva.</textarea>
+        </div>
+      </div>
+
+      <div class="moto-form-footer">
+        <button type="button" class="btn btn-outline" onclick="ApexMoto.closeMotoFormModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" id="btn-save-moto">
+          💾 Guardar Motocicleta
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOAST NOTIFICATIONS
+  ═══════════════════════════════════════════════════════ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════ -->
+  <script src="data/motorcycles.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
